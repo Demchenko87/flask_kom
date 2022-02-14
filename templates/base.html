@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>{% block tit %}{% endblock %}</title>
+<meta name="keywords" content="{% block key %}{% endblock %}" />
+<meta name="description" content="{% block des %}{% endblock %}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta content="Komentish" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link href="{{ url_for('static', filename='com.png') }}" rel="shortcut icon" type="image/x-icon" />
+
+
+    <!--Morris Chart CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/morris/morris.css') }}">
+
+    <link href="{{ url_for('static', filename='assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='assets/css/icons.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='assets/css/style.css') }}" rel="stylesheet" type="text/css">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        #topnav .navigation-menu > li:hover a {
+  text-decoration: none;
+}
+        .menu-extras .navbar {height: 61px!important;}
+        .topbar-main {height: 61px;}
+        #topnav .topbar-main .logo {
+  line-height: 60px;
+  text-transform: uppercase;
+  float: left;
+  margin-left: 48px;
+}
+    .list-inline-item:not(:last-child) {
+  margin-right: .5rem;
+  margin-top: -7px;
+}
+    </style>
+</head>
+<body>
+    <div class="header-bg">
+        <!-- Navigation Bar-->
+                <header id="topnav">
+            <div class="topbar-main">
+                <div class="container-fluid">
+                    <!-- Logo-->
+                    <div>
+                        <a href="{{ url_for('index') }}" class="logo">
+                            <img src="{{ url_for('static', filename='log3.png') }}" class="logo-lg" alt="" height="26">
+                            <img src="{{ url_for('static', filename='log3.png') }}" class="logo-sm" alt="" height="26">
+                        </a>
+                    </div>
+                    <!-- End Logo-->
+                    <div class="menu-extras topbar-custom navbar p-0">
+                        <ul class="mb-0 nav navbar-right ml-auto list-inline">
+                            <li class="list-inline-item dropdown notification-list">
+                                <a href="#" data-target="#" class="dropdown-toggle waves-effect waves-light notification-icon-box" data-toggle="dropdown" aria-expanded="true">
+                                    <i class="fa fa-bell"></i> <span class="badge badge-xs badge-danger"></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-lg" style="left: -165px">
+                                    <li class="text-center notifi-title">Информация</li>
+                                    <li class="list-group">
+										  <a href="{{ url_for('ruladdcomp') }}" class="dropdown-item notify-item mt-2">
+                                            <div class="notify-icon bg-success"><i class="mdi mdi-message-text-outline"></i></div>
+                                            <p class="notify-details">Добавить компанию<span class="text-muted">подать заявку</span></p>
+                                        </a>  <a href="{{ url_for('rules') }}" class="dropdown-item notify-item mt-2">
+                                            <div class="notify-icon bg-info"><i class="mdi mdi-information"></i></div>
+                                            <p class="notify-details">Правила<span class="text-muted">пользования сайтом</span></p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                          <!--   <li class="list-inline-item notification-list d-none d-sm-inline-block">
+                                <a href="#" id="btn-fullscreen" class="waves-effect waves-light notification-icon-box"><i class="fas fa-expand"></i></a>
+                            </li> -->
+                            <li class="menu-item dropdown notification-list list-inline-item">
+                                <!-- Mobile menu toggle-->
+                                <a class="navbar-toggle nav-link">
+                                    <div class="lines">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
+                                </a>
+                                <!-- End mobile menu toggle-->
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- end menu-extras -->
+                    <div class="clearfix"></div>
+                </div>
+                <!-- end container -->
+            </div>
+            <!-- end topbar-main -->
+            <!-- MENU Start -->
+            <div class="navbar-custom">
+                <div class="container-fluid">
+                    <div id="navigation">
+                        <!-- Navigation Menu-->
+						<ul class="navigation-menu">
+						 <li class="has-submenu"><a href="/"><i class="ti-briefcase"></i>Компании</a></li> <li class="has-submenu"><a href="{{ url_for('posts.blog') }}"><i class="ti-comment-alt"></i>Блог</a></li> <li class="has-submenu"><a href="{{ url_for('about') }}"><i class="ti-book"></i>О Нас</a></li> <li class="has-submenu"><a href="{{ url_for('premium') }}"><i class="ti-hand-point-right"></i>Premium размещение</a></li> <li class="has-submenu"><a href="{{ url_for('contact') }}"><i class="ti-email"></i>Контакты</a></li>
+							<li class="has-submenu">
+							<div class="active-pink-4 mb-4" style="padding:10px 20px 0px 20px; float:lleft; width:300px;">
+
+
+<form class="form-inline" method="GET" action="{{ url_for('search') }}">
+<span onclick="myform.submit()" style="cursor:pointer;"><i class="fas fa-search" aria-hidden="true"></i></span>
+<input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Поиск по сайту" aria-label="Search" name="search">
+							</form>
+{#                                #}
+{# <form class="navbar-form navbar-right" role="search" method="get" action="{{ url_for('search') }}">#}
+{#        <div class="form-group">#}
+{#          <input type="text" class="form-control" name="search" placeholder="Поиск по сайту" data-toggle="hideseek" data-list=".list">#}
+{##}
+{##}
+{##}
+{#        </div>#}
+{##}
+{#        <button type="submit" class="btn btn-warning">Найти</button>#}
+{##}
+{#      </form>   #}
+
+							 </div>
+							</li>
+						</ul>
+					<!-- End navigation menu -->
+                    </div>
+				<!-- end #navigation -->
+                </div>
+                <!-- end container -->
+            </div>
+            <!-- end navbar-custom -->
+        </header>
+        <!-- End Navigation Bar-->
+    </div>
+    <!-- header-bg -->
+<div class="wrapper ">
+        <div class="container-fluid ">
+           {% block content %}
+            {% endblock %}
+        </div>
+        </div>
+        <!-- end wrapper -->
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        © 2019 - 2022 komentish
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- End Footer -->
+        <!-- jQuery  -->
+ <!-- jQuery  -->
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        <script src="{{ url_for('static', filename='assets/js/popper.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/modernizr.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/detect.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/fastclick.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/jquery.slimscroll.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/jquery.blockUI.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/waves.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/wow.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/jquery.nicescroll.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/jquery.scrollTo.min.js') }}"></script>
+        <!--Morris Chart-->
+        <script src="{{ url_for('static', filename='assets/plugins/morris/morris.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/plugins/raphael/raphael.min.js') }}"></script>
+        <!-- KNOB JS -->
+        <script src="{{ url_for('static', filename='assets/plugins/jquery-knob/excanvas.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/plugins/jquery-knob/jquery.knob.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/plugins/flot-chart/jquery.flot.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/plugins/flot-chart/jquery.flot.tooltip.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/plugins/flot-chart/jquery.flot.resize.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/plugins/flot-chart/jquery.flot.pie.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/plugins/flot-chart/jquery.flot.selection.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/plugins/flot-chart/jquery.flot.stack.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/plugins/flot-chart/jquery.flot.crosshair.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/pages/dashboard.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/app.js') }}"></script>
+</body>
+</html>

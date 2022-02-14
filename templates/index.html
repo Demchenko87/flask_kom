@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}Komentish - сайт отзывов{% endblock %}
+
+{% block content %}
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-title-box">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <h1 class="page-title m-0">Компании на komentish.com</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+            {% for i in divorecd|sort(attribute='id', reverse = True) %}
+                 <div class="col-sm-6 col-xl-3">
+                    <div class="card">
+                        <div class="card-heading p-4">
+                            <div>
+
+                               <a href="{{ url_for('divorced_detail', slug=i.slug, id=i.id) }}"><img src="{{ url_for('static', filename=i.image) }}" alt="{{ i.title }}" width="255"/></a>
+                                <div class="float-right">
+
+
+                                    <p class="text-muted mb-0 mt-2" style="font-size:16px; color:#000!important;">{{ i.title }}</p>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+            </div>
+
+
+
+
+
+            <!-- end row -->
+
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-body">
+							<p><span style="font-size: 14pt;"><strong><a href="https://komentish.com/">Komentish.com</a></strong> - Европейский Сайт Отзывов! Создан с целью повышения эффективности и качества предоставляемых услуг и товаров. Каждый день наш сайт посещают десятки тысяч людей, которые формируют свое определенное мнение о компании, товаре или услуге. Каждый день мы стараемся сделать наш сервис еще лучше и удобнее для Вас!</span></p>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col -->
+
+
+
+                <!-- end row -->
+
+            </div>
+{% endblock %}

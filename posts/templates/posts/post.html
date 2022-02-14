@@ -1,0 +1,16 @@
+
+{% extends 'base.html' %}
+{% block tit %}{{ post.tit }}{% endblock %}
+{% block key %}{{ post.key }}{% endblock %}
+{% block des %}{{ post.des }}{% endblock %}
+{% block content %}
+  <div class="row ">
+<div class="col-lg-12 mt-5">
+
+<div class="col-lg-12">
+   <h1 class="text-center">{{ post.title }}</h1>
+{{ post.content | safe }}
+</div>
+</div>
+  </div>
+{% endblock %}

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8" />
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta content="Admin Dashboard" name="description" />
+    <meta content="ThemeDesign" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='assets/images/favicon.ico') }}">
+
+    <!--Morris Chart CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/morris/morris.css') }}">
+
+    <link href="{{ url_for('static', filename='assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='assets/css/icons.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='assets/css/style.css') }}" rel="stylesheet" type="text/css">
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+
+</head>
+
+
+    <body>
+
+        <!-- Begin page -->
+        <div class="accountbg"></div>
+        <div class="wrapper-page">
+            <div class="card card-pages">
+
+                <div class="card-body">
+
+                    <h4 class="text-muted text-center m-t-0"><b>Войти в admin панель</b></h4>
+
+                        {% from "security/_macros.html" import render_field_with_errors, render_field %}
+{% include "security/_messages.html" %}
+
+<form action="{{ url_for_security('login') }}" method="POST" name="login_user_form">
+  {{ login_user_form.hidden_tag() }}
+  {{ render_field_with_errors(login_user_form.email, class='form-control') }}
+  {{ render_field_with_errors(login_user_form.password, class='form-control') }}
+
+  {{ render_field(login_user_form.next, class='form-control') }}
+
+    <button class='btn btn-primary btn-block btn-lg waves-effect waves-light' type="submit">Войти</button>
+</form>
+{% include "security/_menu.html" %}
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <!-- jQuery  -->
+        <script src="../../static/assets/js/jquery.min.js"></script>
+        <script src="../../static/assets/js/popper.min.js"></script>
+        <script src="../../static/assets/js/bootstrap.min.js"></script>
+        <script src="../../static/assets/js/modernizr.min.js"></script>
+        <script src="../../static/assets/js/detect.js"></script>
+        <script src="../../static/assets/js/fastclick.js"></script>
+        <script src="../../static/assets/js/jquery.slimscroll.js"></script>
+        <script src="../../static/assets/js/jquery.blockUI.js"></script>
+        <script src="../../static/assets/js/waves.js"></script>
+        <script src="../../static/assets/js/wow.min.js"></script>
+        <script src="../../static/assets/js/jquery.nicescroll.js"></script>
+        <script src="../../static/assets/js/jquery.scrollTo.min.js"></script>
+
+        <script src="../../static/assets/js/app.js"></script>
+
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
