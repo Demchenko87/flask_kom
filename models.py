@@ -105,9 +105,12 @@ class Company(db.Model):
 class Comments(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(160))
-    City = db.Column(db.String(100), nullable=True)
+    city = db.Column(db.String(100), nullable=True)
+    email = db.Column(db.String(100), nullable=True)
     stars = db.Column(db.String(140), unique=True)
     content = db.Column(db.Text)
+    publish = db.Column(db.Boolean, default=False, nullable=False)
+    datetime = db.Column(db.String(100), nullable=True)
     company_id = db.Column(db.Integer, db.ForeignKey('company.id'), nullable=False)
 
 

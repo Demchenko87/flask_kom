@@ -3,10 +3,6 @@
 
 {% block content %}
 
-
-
-
-
 <div class="wrapper">
 <div class="container-fluid">
 
@@ -52,22 +48,84 @@
 <br>
 <h4 class="page-title m-0">отзывы о компании ZAGRANiS | Загранис</h4>
 <br>
-<h3 style="color:#3e445e;"><a href="kompanii/zagranitsa/zagranis/nikita32.html">Никита</a></h3>
-<h5>Город: Майами</h5>
+
+    <hr>
+<form method="POST" action="{{ url_for('company', id = company.id, slug = company.slug) }}">
+				<div class="panel-body">
+					<div class="row">
+						{{ form.csrf_token }}
+						<div class="col-lg-6 col-md-offset-3">
+
+
+
+                            <div class="form-group">
+								<label>Имя</label>
+								{{ form.name(class='form-control') }}
+							</div>
+                            <div class="form-group">
+								<label>city</label>
+								{{ form.city(class='form-control') }}
+							</div>
+                            <div class="form-group">
+								<label>email</label>
+								{{ form.email(class='form-control') }}
+							</div>
+                            <div class="form-group">
+								<label>stars</label>
+								{{ form.stars(class='form-control') }}
+							</div>
+                            <div class="form-group">
+								<label>content</label>
+								{{ form.content(class='form-control') }}
+							</div>
+                            <div class="form-group">
+								<label>datetime</label>
+								{{ form.datetime(class='form-control') }}
+							</div>
+                            <div class="form-group">
+								<label>company_id</label>
+								{{ form.company_id(class='form-control') }}
+							</div>
+
+
+						</div>
+
+					</div>
+				</div>
+
+				<div class="panel-footer">
+					<button type="submit" class="btn btn-primary">
+						<i class="glyphicon glyphicon-plus-sign"></i> Сохранить
+					</button>
+				</div>
+			</form>
+    <hr>
+
+  {% for i in comments%}
+    <h3 style="color:#3e445e;">{{ i.name }}</h3>
+<h5>Город: {{ i.city }}</h5>
 <h4>Оценка:
-<img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16">
+
+{{ i.stars }}
 </h4>
 <span style="white-space:normal;">
 <div class="text_com">
 <div class="item">
 <div class="comment">
-<p>Мне посчастливилось найти компанию Загранис и получить визу в США в кратчайшие сроки. Я знаю людей, которые начали это делать раньше меня, но либо сами, либо через другие фирмы. Так вот у них визы ещё нет, а у меня есть)))) Спасибо!!!))))</p>
+<p>{{i.content}}</p>
 </div>
 </div>
 </div></span>
-31.янв.2022
+    {{ i.datetime }}
 <hr>
-<br><h3 style="color:#3e445e;"><a href="kompanii/zagranitsa/zagranis/yana10.html">Яна</a></h3>
+<br>
+    {% endfor %}
+
+
+
+
+
+<h3 style="color:#3e445e;"><a href="kompanii/zagranitsa/zagranis/yana10.html">Яна</a></h3>
 <h5>Город: Ивано-Франковск</h5>
 <h4>Оценка:
 <img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16">

@@ -26,15 +26,35 @@ def index():
 
 @app.route('/divorced/<int:id>/<slug>')
 def divorced_detail(id, slug):
+
     divorced = Divorced.query.filter(Divorced.slug == slug).first()
     divorced_f = Divorced.query.filter(Divorced.id == id).first()
     return render_template('divorced_detail.html', divorced_f=divorced_f, divorced=divorced)
 
-@app.route('/divorced/company/<int:id>/<slug>')
+@app.route('/divorced/company/<int:id>/<slug>', methods=['GET', 'POST'])
 def company(id, slug):
+    form = AddComment()
+    coments_all = Company.query.all()
+
+    comments = Comments.query.filter(id == Comments.company_id)
     # company_s = Company.query.filter(Company.slug == slug).first()
     company = Company.query.filter(Company.id == id).first()
-    return render_template('company_detail.html', company=company)
+
+    if form.validate_on_submit():
+        new_comment = Comments(name=form.name.data,
+                               city=form.city.data,
+                               email=form.email.data,
+                               stars=form.stars.data,
+                               content=form.content.data,
+                               datetime=form.datetime.data,
+                               company_id=form.company_id.data,
+                               )
+        db.session.add(new_comment)
+        db.session.commit()
+        return redirect(request.referrer)
+        #return redirect(url_for('company'))
+
+    return render_template('company_detail.html', company=company, coments_all=coments_all, form=form, comments=comments)
 
 
 @app.route('/admin')
@@ -46,6 +66,20 @@ def admin():
 def about():
     about = AboutUs.query.all()
     return render_template('about.html', about=about)
+
+@app.route('/about/add', methods=['GET', 'POST'])
+@login_required
+def add_about():
+    form = AddAbout()
+    about = AboutUs.query.all()
+    if form.validate_on_submit():
+        new_about = AboutUs(content=form.content.data)
+        db.session.add(new_about)
+        db.session.commit()
+        return redirect(url_for('add_about'))
+    return render_template('admin/add_about.html', admin=True, form=form, about=about)
+
+
 
 @app.route('/premium')
 def premium():
@@ -89,6 +123,19 @@ def edit_contact(id):
     else:
         return render_template('admin/edit_contact.html', admin=True, contact=contact)
 
+
+# @app.route('/add/contact', methods=['GET', 'POST'])
+# @login_required
+# def add_contact():
+#     form = AddContact()
+#     contact = Contact.query.all()
+#     if form.validate_on_submit():
+#         new_contact = Contact(content=form.content.data)
+#         db.session.add(new_contact)
+#         db.session.commit()
+#         return redirect(url_for('add_contact'))
+#     return render_template('admin/add_contact.html', admin=True, form=form, contact=contact)
+
 @app.route('/admin/ruladdcomp/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
 def edit_ruladdcomp(id):
@@ -111,17 +158,6 @@ def edit_rules(id):
     else:
         return render_template('admin/edit_rules.html', admin=True, rules=rules)
 
-# @app.route('/about/add', methods=['GET', 'POST'])
-# @login_required
-# def add_about():
-#     form = AddAbout()
-#     about = AboutUs.query.all()
-#     if form.validate_on_submit():
-#         new_about = AboutUs(content=form.content.data)
-#         db.session.add(new_about)
-#         db.session.commit()
-#         return redirect(url_for('add_about'))
-#     return render_template('admin/add_about.html', admin=True, form=form, about=about)
 
 # @app.route('/about/delete/<int:id>', methods=['GET'])
 # @login_required
@@ -187,7 +223,7 @@ def edit_posts(id):
 @login_required
 def add_post():
     form = AddPost()
-    post = Post.query.all()
+
     if form.validate_on_submit():
         image_url_main = photos.save(form.image.data)
         image_url = 'images/' + image_url_main
@@ -195,7 +231,7 @@ def add_post():
         db.session.add(new_post)
         db.session.commit()
         return redirect(url_for('all_blog'))
-    return render_template('admin/add_post.html', admin=True, form=form, post=post)
+    return render_template('admin/add_post.html', admin=True, form=form)
 
 @app.route('/admin/post/delete/<int:id>', methods=['GET'])
 @login_required
