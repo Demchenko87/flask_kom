@@ -7,6 +7,9 @@ from flask_ckeditor import CKEditor, CKEditorField, upload_success, upload_fail
 from wtforms import StringField, IntegerField, validators, TextAreaField, HiddenField, SelectField
 from flask_uploads import UploadSet, configure_uploads, IMAGES
 from flask_wtf.file import FileField, FileAllowed, FileRequired
+import datetime
+now = datetime.datetime.now()
+from wtforms.validators import DataRequired, ValidationError
 
 photos = UploadSet('photos', IMAGES)
 configure_uploads(app, photos)
@@ -39,14 +42,15 @@ def company(id, slug):
     comments = Comments.query.filter(id == Comments.company_id)
     # company_s = Company.query.filter(Company.slug == slug).first()
     company = Company.query.filter(Company.id == id).first()
-
+    datetime = now.strftime("%d-%m-%Y %H:%M")
     if form.validate_on_submit():
         new_comment = Comments(name=form.name.data,
                                city=form.city.data,
-                               email=form.email.data,
+                               # email=form.email.data,
                                stars=form.stars.data,
                                content=form.content.data,
                                datetime=form.datetime.data,
+                               # user_id=form.user_id.data,
                                company_id=form.company_id.data,
                                )
         db.session.add(new_comment)
@@ -54,7 +58,7 @@ def company(id, slug):
         return redirect(request.referrer)
         #return redirect(url_for('company'))
 
-    return render_template('company_detail.html', company=company, coments_all=coments_all, form=form, comments=comments)
+    return render_template('company_detail.html', company=company, coments_all=coments_all, form=form, comments=comments, datetime=datetime)
 
 
 @app.route('/admin')
@@ -349,6 +353,46 @@ def delete_company(id):
     db.session.delete(company)
     db.session.commit()
     return redirect(request.referrer)
+
+@app.route('/admin/comments')
+@login_required
+def all_comment():
+    comments = Comments.query.all()
+    return render_template('admin/all_comments.html', admin=True,  comments=comments )
+
+@app.route('/admin/comment/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit_comment(id):
+    comment = Comments.query.get(id)
+    if request.method == 'POST':
+        comment.publish = request.form['publish']
+
+        # comment.id = request.form['id']
+        # comment.name = request.form['name']
+        # comment.city = request.form['city']
+        # comment.stars = request.form['stars']
+        # comment.content = request.form['content']
+
+        # comment.datetime = request.form['datetime']
+        # comment.company_id = request.form['company_id']
+        try:
+            db.session.commit()
+            return redirect(request.referrer)
+        except:
+            return "При редактировании произошла ошибка"
+    return render_template('admin/edit_comment.html', admin=True, comment=comment)
+
+
+@app.route('/admin/comment/delete/<int:id>', methods=['GET'])
+@login_required
+def delete_comment(id):
+    comment = Comments.query.filter_by(id=id).first()
+    db.session.delete(comment)
+    db.session.commit()
+    return redirect(request.referrer)
+
+
+
 
 # class AddPremium(FlaskForm):
 #     content = CKEditorField('Описание')

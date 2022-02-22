@@ -50,58 +50,17 @@
 <br>
 
     <hr>
-<form method="POST" action="{{ url_for('company', id = company.id, slug = company.slug) }}">
-				<div class="panel-body">
-					<div class="row">
-						{{ form.csrf_token }}
-						<div class="col-lg-6 col-md-offset-3">
 
-
-
-                            <div class="form-group">
-								<label>Имя</label>
-								{{ form.name(class='form-control') }}
-							</div>
-                            <div class="form-group">
-								<label>city</label>
-								{{ form.city(class='form-control') }}
-							</div>
-                            <div class="form-group">
-								<label>email</label>
-								{{ form.email(class='form-control') }}
-							</div>
-                            <div class="form-group">
-								<label>stars</label>
-								{{ form.stars(class='form-control') }}
-							</div>
-                            <div class="form-group">
-								<label>content</label>
-								{{ form.content(class='form-control') }}
-							</div>
-                            <div class="form-group">
-								<label>datetime</label>
-								{{ form.datetime(class='form-control') }}
-							</div>
-                            <div class="form-group">
-								<label>company_id</label>
-								{{ form.company_id(class='form-control') }}
-							</div>
-
-
-						</div>
-
-					</div>
-				</div>
-
-				<div class="panel-footer">
-					<button type="submit" class="btn btn-primary">
-						<i class="glyphicon glyphicon-plus-sign"></i> Сохранить
-					</button>
-				</div>
-			</form>
-    <hr>
 
   {% for i in comments%}
+      {% if i.publish == '0' %}{% elif i.publish == '1' %}
+
+{% if current_user.is_authenticated and current_user.id == 1 %}
+
+<a href="{{ url_for('delete_comment', id=i.id) }}" class="btn btn-danger">Удалить</a>
+
+{% endif %}
+
     <h3 style="color:#3e445e;">{{ i.name }}</h3>
 <h5>Город: {{ i.city }}</h5>
 <h4>Оценка:
@@ -119,288 +78,64 @@
     {{ i.datetime }}
 <hr>
 <br>
+      {% endif %}
     {% endfor %}
 
 
-
-
-
-<h3 style="color:#3e445e;"><a href="kompanii/zagranitsa/zagranis/yana10.html">Яна</a></h3>
-<h5>Город: Ивано-Франковск</h5>
-<h4>Оценка:
-<img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16">
-</h4>
-<span style="white-space:normal;">
-<div class="text_com">
-<p><span style="font-size: 12pt;">Ехала за границу впервые на работу, обращалась по рекомендации друга, который от этой фирмы ездил в Германию, и честно сказать, я осталась очень довольна работой фирмы, так как по вакансиям предложили отличные варианты, быстро оформили документы. Понравилось еще что выезд с Украины организованный. Это очень удобно для первопроходцев) в самой Германии нюансов не было по работе. Менеджеры компании всегда была на связи и отвечала на все мои вопросы если они появлялись. Спасибо огромное.</span></p>
-</div></span>
-28.янв.2022
-<hr>
-<br><h3 style="color:#3e445e;"><a href="kompanii/zagranitsa/zagranis/masha6.html">Миша</a></h3>
-<h5>Город: Киев</h5>
-<h4>Оценка:
-<img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16">
-</h4>
-<span style="white-space:normal;">
-<div class="text_com">
-<p><span style="font-size: 12pt;">Каждый кто едет работать заграницу впервые, задается вопросом о том, правильно ли он выбрал агенство которое обеспечит его работой. Вот и я задавался таким вопросом. Обратился в Загранис. Что можно сказать об итогах работы с данным агенством? Я еду работать через это агенство третий раз, думаю у всех кто читает данный отзыв вопросы по поводу доверять данному агенству или нет, отпадут. Если вы не желаете рисковать, то это агенство для вас. Все документы оформят, визы получите без проблем и вперед - зарабатывать деньги. 5/5.</span></p>
-</div></span>
-25.янв.2022
-<hr>
-<br><h3 style="color:#3e445e;"><a href="kompanii/zagranitsa/zagranis/elmar.html">Эльмар</a></h3>
-<h5>Город: Алматы</h5>
-<h4>Оценка:
-<img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16">
-</h4>
-<span style="white-space:normal;">
-<div class="text_com">
-<p><span style="font-size: 12pt;">Ездил через фирму Загранис на роботу в Нью-Йорк, оформили документы качественно и в срок. Остался доволен, буду ехать ище и не раз и всем советую.</span></p>
-</div></span>
-21.янв.2022
-<hr>
-<br><h3 style="color:#3e445e;"><a href="kompanii/zagranitsa/zagranis/margo1.html">Марго</a></h3>
-<h5>Город: Харьков</h5>
-<h4>Оценка:
-<img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16">
-</h4>
-<span style="white-space:normal;">
-<div class="text_com">
-<p><span style="font-size: 12pt;">Классная компания. Только вернулись из Чехии и планируем снова ехать через эту фирму. Советую всем)))))))</span></p>
-</div></span>
-16.янв.2022
-<hr>
-<br><h3 style="color:#3e445e;"><a href="kompanii/zagranitsa/zagranis/artur13.html">Артур</a></h3>
-<h5>Город: Москва</h5>
-<h4>Оценка:
-<img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16">
-</h4>
-<span style="white-space:normal;">
-<div class="text_com">
-<p><span style="font-size: 12pt;">Добрый день! Хочу оставить положительный отзыв. Ездил в Германию по одному из предложенных вариантов. Остался доволен сервисом. Внимательно прислушивались к моим требованиям. Всегда получал ответы на мои вопросы. Поддержка 24/7. Отдельная благодарность координатору Виталию за быстрое оформление документов и за сопровождение от начала и до конца сотрудничества. Рекомендую компанию Загранис.)</span></p>
-</div></span>
-12.янв.2022
-<hr>
-<br><h3 style="color:#3e445e;"><a href="kompanii/zagranitsa/zagranis/inna14.html">Инна</a></h3>
-<h5>Город: Одесса</h5>
-<h4>Оценка:
-<img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16">
-</h4>
-<span style="white-space:normal;">
-<div class="text_com">
-<p><span style="font-size: 12pt;">Воспользовались услугами данной компани, по трудоустройству в Америке. Все было на высоте, исчерпывающие консультации и быстрое оформление документов. По приезду в Нью-Йорк у нас никаких сюрпризов не было, что нам обещали то мы и получили. Довольны, спасибо вам огромное! Thank you!!!))))</span></p>
-</div></span>
-08.янв.2022
-<hr>
-<br><h3 style="color:#3e445e;"><a href="kompanii/zagranitsa/zagranis/pavel15.html">Павел</a></h3>
-<h5>Город: Самара</h5>
-<h4>Оценка:
-<img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16">
-</h4>
-<span style="white-space:normal;">
-<div class="text_com">
-<p><span style="font-size: 12pt;">Здравствуйте! Хочу оставить свой положительный отзыв про компанию Загранис, потому что помогли с работой и выездом за граицу в нелегкое время. Мы получили полное документальное и информационное сопровождение от компании. Мы поехали парой на работу в Германию. Все условия труда и проживания такие как нам и обещали. На данный момент очень довольны! Спасибо!!))))</span></p>
-</div></span>
-05.янв.2022
-<hr>
-<br><h3 style="color:#3e445e;"><a href="kompanii/zagranitsa/zagranis/mister1.html">Мистер</a></h3>
-<h5>Город: Ташкент</h5>
-<h4>Оценка:
-<img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16">
-</h4>
-<span style="white-space:normal;">
-<div class="text_com">
-<p><span style="font-size: 12pt;">Всем рекомендую! Кантора то что надо, говорят четко, по сути, знатоки своего дела. На бабло не бросают, все обещают, так и есть. Ездил от этой фирмы в Чехию, остался доволен! На данном этапе ожидаю ответа из из-за рубежа для очередной поездки, надеюсь все будет хорошо)</span></p>
-</div></span>
-03.янв.2022
-<hr>
-<br><h3 style="color:#3e445e;"><a href="kompanii/zagranitsa/zagranis/aleks14.html">Алекс</a></h3>
-<h5>Город: Брест</h5>
-<h4>Оценка:
-<img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16">
-</h4>
-<span style="white-space:normal;">
-<div class="text_com">
-<p><span style="font-size: 12pt;">К компании Загранис притензий не имею, выполнили все как обещали. Работал в Чехии на заводе Lear, город Плзень. Единственный минус, что в общежитии картонные стены!!!</span></p>
-</div></span>
-30.дек.2021
-<hr>
-<br><h3 style="color:#3e445e;"><a href="kompanii/zagranitsa/zagranis/nikolaj57.html">Николай</a></h3>
-<h5>Город: Одесса</h5>
-<h4>Оценка:
-<img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16">
-</h4>
-<span style="white-space:normal;">
-<div class="text_com">
-<p><span style="font-size: 12pt;">Ездил впервые от этой компании. Условия проживания и труда приемлемы. Всем доволен, буду обращаться к Вам еще, спасибо вам большое!</span></p>
-</div></span>
-29.дек.2021
-<hr>
-<br><h3 style="color:#3e445e;"><a href="kompanii/zagranitsa/zagranis/lesya3.html">Леся</a></h3>
-<h5>Город: Минск</h5>
-<h4>Оценка:
-<img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16">
-</h4>
-<span style="white-space:normal;">
-<div class="text_com">
-<p><span style="font-size: 12pt;">Рекомендую компанию Загранис за очень качественный сервис и сопровождение, как до выезда на заграницу, так и после трудоустройства)))</span></p>
-</div></span>
-27.дек.2021
-<hr>
-<br><h3 style="color:#3e445e;"><a href="kompanii/zagranitsa/zagranis/olga31.html">Натали</a></h3>
-<h5>Город: Днепр</h5>
-<h4>Оценка:
-<img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16">
-</h4>
-<span style="white-space:normal;">
-<div class="text_com">
-<p><span style="font-size: 12pt;">Хорошая компания, очень. Уже 2 раза помогали лично мне с выездом за границу. А также помогли моему двоюродному брату в этом, маминой подруге. Все делали четко, быстро и объясняли все нюансы и детали. Для таких хочется оставлять отзывы. Спасибо.</span></p>
-</div></span>
-25.дек.2021
-<hr>
-<br><h3 style="color:#3e445e;"><a href="kompanii/zagranitsa/zagranis/olga32.html">Ольга</a></h3>
-<h5>Город: Львов</h5>
-<h4>Оценка:
-<img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16">
-</h4>
-<span style="white-space:normal;">
-<div class="text_com">
-<p><span style="font-size: 12pt;">Очень рада, что нашла такую ​​ответственную, честную, надежную и высоко компетентную компанию. Спасибо, что помогли и с поиском работы и с подачей документов!!!)))</span></p>
-</div></span>
-23.дек.2021
-<hr>
-<br><h3 style="color:#3e445e;"><a href="kompanii/zagranitsa/zagranis/viktoriya50.html">Виктория</a></h3>
-<h5>Город: Киев</h5>
-<h4>Оценка:
-<img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16">
-</h4>
-<span style="white-space:normal;">
-<div class="text_com">
-<p><span style="font-size: 12pt;">Надежная компания. Рекомендую всем. Квалифицированные работники, качественно оказанные услуги. Первая моя поездка за границу была с помощью компании Загранис. Искренне благодарна. Всем своим друзьям рекомендую, и они удовлетворены. Можете смело обращаться к ним, если вам нужна хорошая работа за границей!)</span></p>
-</div></span>
-09.дек.2021
-<hr>
-<br><h3 style="color:#3e445e;"><a href="kompanii/zagranitsa/zagranis/mister.html">Мистер</a></h3>
-<h5>Город: Астана</h5>
-<h4>Оценка:
-<img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16">
-</h4>
-<span style="white-space:normal;">
-<div class="text_com">
-<p><span style="font-size: 12pt;">Работали с другом в Швеции через эту фирму. Помогли найти подходящие вакансии для нас, чтоб и зарплата норм была и работа приемлемая. Денег заработаливали по 2000 евро в месяц. Спасибо Вам)))</span></p>
-</div></span>
-30.ноя.2021
-<hr>
-<br><h3 style="color:#3e445e;"><a href="kompanii/zagranitsa/zagranis/vadim68.html">Вадим</a></h3>
-<h5>Город: Москва</h5>
-<h4>Оценка:
-<img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16">
-</h4>
-<span style="white-space:normal;">
-<div class="text_com">
-<p><span style="font-size: 12pt;">Ездил от компании на работу дважды. Оба раза работал в Америке в Нью-Йорке, но на разных вакансиях. Первый раз работал на складах (карщиком), вернулся быстро, по состоянию здоровья. Второй раз работал на стройке. Ездил на 6 мес., заработал нормально, правда в последний месяц, давали мало часов. Очень понравилось работать с менеджерами, которые курировали на протяжении всего периода и во всем помогали. Рекомендую к сотрудничеству компанию Загранис.</span></p>
-</div></span>
-28.ноя.2021
-<hr>
-<br><h3 style="color:#3e445e;"><a href="kompanii/zagranitsa/zagranis/ali8.html">Али</a></h3>
-<h5>Город: Ташкент</h5>
-<h4>Оценка:
-<img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16">
-</h4>
-<span style="white-space:normal;">
-<div class="text_com">
-<p><span style="font-size: 12pt;">Хочу поблагодарить данное агентство Загранис за то, что устроили меня на нормальную работу в Германию. Так как в основном приезжие получают не очень хорошие условия, а я же живу бесплатно в хорошем доме и получаю достойную зарплату. Поэтому смело могу советовать ваше агентство всем своим знакомым и друзьям. Спасибо!)))))</span></p>
-</div></span>
-25.ноя.2021
-<hr>
-<br><h3 style="color:#3e445e;"><a href="kompanii/zagranitsa/zagranis/sergej88.html">Сергей</a></h3>
-<h5>Город: Львов</h5>
-<h4>Оценка:
-<img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16">
-</h4>
-<span style="white-space:normal;">
-<div class="text_com">
-<p><span style="font-size: 12pt;">Довелось посотрудничать с этой компанией в далеком 2017 году))). Заказал анкету и страховку для выезда в Польшу. Все было выполнено в лучшей форме и остались только лишь самые приятные впечатления) Рекомендую!!!))))</span></p>
-</div></span>
-21.ноя.2021
-<hr>
-<br><h3 style="color:#3e445e;"><a href="kompanii/zagranitsa/zagranis/valentina7.html">Валентина</a></h3>
-<h5>Город: Полтава</h5>
-<h4>Оценка:
-<img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16"><img src="star.png" class="star" alt="1 star" width="16">
-</h4>
-<span style="white-space:normal;">
-<div class="text_com">
-<p><span style="font-size: 12pt;">Спасибо за теплый прием и помощь с визой, буду вас теперь советовать своим коллегам, друзьям и просто хорошим знакомым!!!)))</span></p>
-</div></span>
-20.ноя.2021
 <hr>
 <br>
 <ul class="pagination m-t-20 m-b-5"> <li class="page-item active"><a class="page-link" href="/kompanii/zagranitsa/zagranis.html">1</a></li> <li class="page-item"><a class="page-link" href="/kompanii/zagranitsa/zagranis.html?list_page=2">2</a></li> <li class="page-item"><a class="page-link" href="/kompanii/zagranitsa/zagranis.html?list_page=3">3</a></li> <li class="page-item"><a class="page-link" href="/kompanii/zagranitsa/zagranis.html?list_page=4">4</a></li> <li class="page-item"><a class="page-link" href="/kompanii/zagranitsa/zagranis.html?list_page=5">5</a></li> <li class="page-item"><a class="page-link" href="/kompanii/zagranitsa/zagranis.html?list_page=6">6</a></li> <li class="page-item"><a class="page-link" href="/kompanii/zagranitsa/zagranis.html?list_page=7">7</a></li> <li class="page-item"><a class="page-link" href="/kompanii/zagranitsa/zagranis.html?list_page=8">8</a></li> <li class="page-item"><a class="page-link" href="/kompanii/zagranitsa/zagranis.html?list_page=9">9</a></li> <li class="page-item"><a href="/kompanii/zagranitsa/zagranis.html?list_page=9" class="page-link" aria-label="Next"><i class="fa fa-angle-right"></i></a></li></ul>
-<h4 class="page-title m-0">Добавить отзыв о компании ZAGRANiS | Загранис</h4><br>
-<form class="form-horizontal" method="post">
-<input type="hidden" name="formid" value="basic">
-<div class="form-group">
-<div class="col-sm-12">
-<input type="text" class="form-control" id="name" placeholder="Имя" name="name" value="">
-</div>
-</div>
-<div class="form-group">
-<div class="col-sm-12">
-<input type="text" class="form-control" id="city" placeholder="Город" name="city" value="">
-</div>
-</div>
-<div class="form-group">
-<div class="col-sm-12">
-<input type="text" class="form-control" id="email" placeholder="Email" name="email" value="">
-</div>
-</div>
-<div class="form-group">
-<div class="col-sm-12">
-<input type="text" class="form-control" id="phone" placeholder="+3 xxx xxx-xx-xx" name="phone" value="">
-</div>
-</div>
-<div class="form-group col col-12" style="display:none;">
-<input type="text" class="form-control" id="company" name="company" value="ZAGRANiS | Загранис">
-</div>
-<div class="form-group">
-<div class="col-sm-12">
-<p><b>Оценка компании:</b></p>
+<h4 class="page-title m-0">Добавить отзыв о компании {{ company.title }}</h4><br>
+<form method="POST" action="{{ url_for('company', id = company.id, slug = company.slug) }}">
+				<div class="panel-body">
+					<div class="row">
+						{{ form.csrf_token }}
+						<div class="col-lg-6 col-md-offset-3">
 
-<p><input name="stars" type="radio" value="1"><img src="star.png" class="star" alt="1 star" width="16"></p>
-<p><input name="stars" type="radio" value="2">
-<img src="star.png" class="star" alt="1 star" width="16">
-<img src="star.png" class="star" alt="1 star" width="16">
-</p>
-<p><input name="stars" type="radio" value="3">
-<img src="star.png" class="star" alt="1 star" width="16">
-<img src="star.png" class="star" alt="1 star" width="16">
-<img src="star.png" class="star" alt="1 star" width="16">
-</p>
-<p><input name="stars" type="radio" value="4">
-<img src="star.png" class="star" alt="1 star" width="16">
-<img src="star.png" class="star" alt="1 star" width="16">
-<img src="star.png" class="star" alt="1 star" width="16">
-<img src="star.png" class="star" alt="1 star" width="16">
-</p>
-<p><input name="stars" type="radio" value="5">
-<img src="star.png" class="star" alt="1 star" width="16">
-<img src="star.png" class="star" alt="1 star" width="16">
-<img src="star.png" class="star" alt="1 star" width="16">
-<img src="star.png" class="star" alt="1 star" width="16">
-<img src="star.png" class="star" alt="1 star" width="16"></p>
-</div>
-</div>
+
+                            <div class="form-group">
+								<label>Имя</label>
+								{{ form.name(class='form-control') }}
+							</div>
+                            <div class="form-group">
+								<label>Город</label>
+								{{ form.city(class='form-control') }}
+							</div>
+{#                            <div class="form-group" >#}
+{#								<label>email</label>#}
+{#								{{ form.email(class='form-control', type='email') }}#}
+{#							</div>#}
+                            <div class="form-group">
+								<label>Количество зверз от 1 до 5</label>
+								{{ form.stars(class='form-control', placeholder='1', type='number', min=1, max=5) }}
+							</div>
+                            <div class="form-group">
+								<label>Отзыв</label>
+								{{ form.content(class='form-control', rows='10') }}
+							</div>
+                            <div class="form-group" style="display: none">
+
+								{{ form.datetime(class='form-control', value=datetime) }}
+							</div>
+
+                            <div class="form-group" style="display: none">
+
+								{{ form.company_id(class='form-control',type='number', value=company.id) }}
+							</div>
 <div class="form-group">
-<div class="col-sm-12">
-<textarea class="form-control" id="message" placeholder="Ваш комментарий" name="message" rows="10"></textarea>
-</div>
-</div>
-<div class="form-group">
-<div class="col-sm-offset-2 col-sm-12">
-<button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-envelope"></i> Отправить</button>
-</div>
-</div>
-</form>
+					<button type="submit" class="btn btn-primary">
+						<i class="glyphicon glyphicon-plus-sign"></i> Сохранить
+					</button>
+				</div>
+						</div>
+
+					</div>
+
+				</div>
+
+
+			</form>
+
 <br>
 </div>
 </div>

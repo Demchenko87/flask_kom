@@ -37,10 +37,11 @@ class AddCompany(FlaskForm):
     image = FileField('image', validators=[FileAllowed(IMAGES, 'Only images are accepted.')])
 
 class AddComment(FlaskForm):
-    name = StringField('name')
-    city = StringField('city')
-    email = StringField('email')
-    stars = StringField('stars')
-    content = StringField('content')
-    datetime = StringField('datetime')
-    company_id = StringField('company_id')
+    name = StringField('name', [validators.required()])
+    city = StringField('city', [validators.required()])
+    # email = StringField('email')
+    stars = StringField('stars', [validators.required()])
+    content = TextAreaField('content', [validators.required()])
+    datetime = StringField('datetime', [validators.required()])
+    # user_id = StringField('user_id')
+    company_id = StringField('company_id', [validators.required()])
