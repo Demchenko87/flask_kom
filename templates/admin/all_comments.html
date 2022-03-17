@@ -39,7 +39,7 @@
       <td>{{ i.city }}</td>
             <td>{{ i.stars }}</td>
             <td>{{ i.datetime }}</td>
-            <td>{% if i.publish == 0 %}<i class="fas fa-times-circle text-danger" ></i>{% elif i.publish == 1 %}<i class="fas fa-check-circle text-success"></i>{% endif %}</td>
+            <td>{% if i.publish == '0' %}<i class="fas fa-times-circle text-danger" ></i>{% elif i.publish == '1' %}<i class="fas fa-check-circle text-success"></i>{% endif %}</td>
       <td><a href="{{ url_for('edit_comment', id=i.id) }}" title="Редактировать"><i class="fas fa-edit"></i></a></td>
         <td>
             <!-- Button trigger modal -->
