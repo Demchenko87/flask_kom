@@ -105,6 +105,9 @@ def rules():
     rules = Rules.query.all()
     return render_template('rules.html', rules=rules)
 
+
+
+
 @app.route('/search', methods=['GET', 'POST'])
 def search():
     search = request.args.get('search')
