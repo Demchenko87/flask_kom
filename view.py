@@ -163,13 +163,13 @@ def edit_rules(id):
         return render_template('admin/edit_rules.html', admin=True, rules=rules)
 
 
-# @app.route('/about/delete/<int:id>', methods=['GET'])
-# @login_required
-# def delete_about(id):
-#     about = AboutUs.query.filter_by(id=id).first()
-#     db.session.delete(about)
-#     db.session.commit()
-#     return redirect(request.referrer)
+@app.route('/about/delete/<int:id>', methods=['GET'])
+@login_required
+def delete_about(id):
+    about = AboutUs.query.filter_by(id=id).first()
+    db.session.delete(about)
+    db.session.commit()
+    return redirect(request.referrer)
 
 @app.route('/admin/about/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
