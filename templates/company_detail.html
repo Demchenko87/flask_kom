@@ -52,7 +52,7 @@
     <hr>
 
 
-  {% for i in comments%}
+  {% for i in pages.items%}
       {% if i.publish == '0' %}{% elif i.publish == '1' %}
 
 {% if current_user.is_authenticated and current_user.id == 1 %}
@@ -84,8 +84,24 @@
 
 <hr>
 <br>
-<ul class="pagination m-t-20 m-b-5"> <li class="page-item active"><a class="page-link" href="/kompanii/zagranitsa/zagranis.html">1</a></li> <li class="page-item"><a class="page-link" href="/kompanii/zagranitsa/zagranis.html?list_page=2">2</a></li> <li class="page-item"><a class="page-link" href="/kompanii/zagranitsa/zagranis.html?list_page=3">3</a></li> <li class="page-item"><a class="page-link" href="/kompanii/zagranitsa/zagranis.html?list_page=4">4</a></li> <li class="page-item"><a class="page-link" href="/kompanii/zagranitsa/zagranis.html?list_page=5">5</a></li> <li class="page-item"><a class="page-link" href="/kompanii/zagranitsa/zagranis.html?list_page=6">6</a></li> <li class="page-item"><a class="page-link" href="/kompanii/zagranitsa/zagranis.html?list_page=7">7</a></li> <li class="page-item"><a class="page-link" href="/kompanii/zagranitsa/zagranis.html?list_page=8">8</a></li> <li class="page-item"><a class="page-link" href="/kompanii/zagranitsa/zagranis.html?list_page=9">9</a></li> <li class="page-item"><a href="/kompanii/zagranitsa/zagranis.html?list_page=9" class="page-link" aria-label="Next"><i class="fa fa-angle-right"></i></a></li></ul>
-<h4 class="page-title m-0">Добавить отзыв о компании {{ company.title }}</h4><br>
+
+<nav>
+                  <ul class="pagination">
+                    <li class="page-item {% if not pages.has_prev %}disabled {% endif %}">
+                      <a class="page-link" href="?page={{ pages.prev_num }}" tabindex="-1"><i class="fa fa-angle-left"></i></a>
+                    </li>
+                  {% for page in pages.iter_pages() %}
+                       <li class="page-item {% if page == pages.page %}active{% endif %}">
+                           <a class="page-link" href="?page={{ page }}">{{ page }} <span class="sr-only">(current)</span></a>
+                       </li>
+                  {% endfor %}
+                    <li class="page-item {% if not pages.next_num %}disabled {% endif %}">
+                      <a class="page-link" href="?page={{ pages.next_num }}"><i class="fa fa-angle-right"></i></a>
+                    </li>
+                  </ul>
+                </nav>
+
+    <h4 class="page-title m-0">Добавить отзыв о компании {{ company.title }}</h4><br>
 <form method="POST" action="{{ url_for('company', id = company.id, slug = company.slug) }}">
 				<div class="panel-body">
 					<div class="row">

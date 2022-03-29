@@ -40,9 +40,19 @@ def company(id, slug):
     coments_all = Company.query.all()
 
     comments = Comments.query.filter(id == Comments.company_id)
+
     # company_s = Company.query.filter(Company.slug == slug).first()
     company = Company.query.filter(Company.id == id).first()
     datetime = now.strftime("%d-%m-%Y %H:%M")
+
+    page_count = 80
+    page = request.args.get('page')
+    if page and page.isdigit():
+        page = int(page)
+    else:
+        page = 1
+    pages = comments.paginate(page=page, per_page=page_count)
+
     if form.validate_on_submit():
         new_comment = Comments(name=form.name.data,
                                city=form.city.data,
@@ -58,7 +68,7 @@ def company(id, slug):
         return redirect(request.referrer)
         #return redirect(url_for('company'))
 
-    return render_template('company_detail.html', company=company, coments_all=coments_all, form=form, comments=comments, datetime=datetime)
+    return render_template('company_detail.html', pages=pages, company=company, coments_all=coments_all, form=form, comments=comments, datetime=datetime, page_count=page_count)
 
 
 @app.route('/admin')
